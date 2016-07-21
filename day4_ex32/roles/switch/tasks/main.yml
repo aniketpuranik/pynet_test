@@ -1,0 +1,2 @@
+- template: src=template.j2 dest=/home/apuranik/pynet_test/day4_ex32/{{ item.hostname }}
+  with_items: "{{ devices }}"

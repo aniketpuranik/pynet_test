@@ -1,0 +1,20 @@
+#!/usr/bin/env python
+ip_addr=raw_input("enter ip address: ")
+
+ip_addr = ip_addr.split(".")
+print ip_addr
+
+ip_addr[3]=0
+bin_ip_addr = []
+
+# ['192', '168', '1', 0]
+for octet in ip_addr:
+    bin_ip_addr.append(bin(int(octet)))
+
+print bin_ip_addr
+
+print "{:<12} {:<12} {:<12} {:<12}".format(*ip_addr)
+print "{:<12} {:<12} {:<12} {:<12}".format(*bin_ip_addr)
+
+
+

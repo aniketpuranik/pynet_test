@@ -1,0 +1,11 @@
+#!usr/bin/env python
+
+a=range(1,50)
+print a
+
+for number in a:
+    if number != 13:
+        #continue
+        print number
+    if number == 39:
+        break

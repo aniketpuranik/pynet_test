@@ -1,0 +1,7 @@
+hostname rtr3
+!
+logging buffered 32000
+no logging console
+enable secret 0 xyz3
+
+ntp server 10.2.2.2

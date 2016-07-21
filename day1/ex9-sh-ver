@@ -1,0 +1,13 @@
+#!usr/bin/env python
+
+sn = 'Processor board ID'
+
+with open("sh-ver") as f:
+    show_ver = f.read().splitlines()
+
+for line in show_ver:
+    if sn in line:
+        print line
+        serial_number = line.split("Processor board ID")
+
+print serial_number[1]

@@ -12,7 +12,6 @@ f = open ("new_test_file.txt", "a")
 f.write("appended\n")
 f.close
 
-f = open ("new_test_file.txt")
-for line in f:
-    print line.strip()
-f.close
+with open ("new_test_file.txt") as f:
+    for line in f:
+        print line.strip()

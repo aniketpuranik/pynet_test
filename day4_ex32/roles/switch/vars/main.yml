@@ -1,0 +1,9 @@
+---
+devices:
+  - {hostname: rtr1, secret: xyz1}
+  - {hostname: rtr2, secret: xyz2}
+  - {hostname: rtr3, secret: xyz3}
+  - {hostname: rtr4, secret: xyz4}
+  - {hostname: rtr5, secret: xyz5}
+ntp_servers: 10.2.2.2
+    
