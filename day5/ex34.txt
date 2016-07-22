@@ -1,0 +1,104 @@
+
+(applied_python)[apuranik@ip-172-30-0-6 DJANGOX]$ cd djproject/
+(applied_python)[apuranik@ip-172-30-0-6 djproject]$ ls
+db.net_system  djproject  manage.py  net_system
+(applied_python)[apuranik@ip-172-30-0-6 djproject]$
+(applied_python)[apuranik@ip-172-30-0-6 djproject]$ cd ~/pynet_test/day5/
+(applied_python)[apuranik@ip-172-30-0-6 day5]$
+(applied_python)[apuranik@ip-172-30-0-6 day5]$ python manage.py shell
+Python 2.7.10 (default, Jul 20 2016, 20:53:27)
+[GCC 4.8.3 20140911 (Red Hat 4.8.3-9)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>>
+>>> for a_device in net_devices:
+...     print a_device.device_type
+...
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'net_devices' is not defined
+>>> from net_system.models import Credentials
+>>>
+>>> from net_system.models import NetworkDevice
+>>> net_devices = NetworkDevice.objects.all()
+>>>
+>>> print net_devices
+[<NetworkDevice: pynet-rtr1>, <NetworkDevice: pynet-rtr2>, <NetworkDevice: pynet-sw1>, <NetworkDevice: pynet-sw2>, <NetworkDevice: pynet-sw3>, <NetworkDevice: pynet-sw4>, <NetworkDevice: juniper-srx>]
+>>>
+>>> all_creds = Credentials.objects.all()
+>>> print all_creds
+[<Credentials: pyclass>, <Credentials: admin1>]
+>>>
+>>> std_cred = all_creds[0]
+>>> arista_cred = all_creds[1]
+>>>
+>>> for a_device in net_devices:
+...     if a_device.device_type == 'cisco_ios':
+...         a_device.credentials = std_cred
+...     else:
+...         a_device.credentials = arista_cred
+...     a_device.credentials.save()
+...     print a_device.credentials
+...
+pyclass
+pyclass
+admin1
+admin1
+admin1
+admin1
+admin1
+>>>
+>>> a_device
+<NetworkDevice: juniper-srx>
+>>> a_device.credentials = std_cred
+>>> a_device.save()
+>>>
+>>> for a_device in net_devices:
+...     a_device.save()
+...
+>>>
+>>> std_cred.networkdevice_set.all()
+[<NetworkDevice: pynet-rtr1>, <NetworkDevice: pynet-rtr2>, <NetworkDevice: juniper-srx>]
+>>>
+>>> arista_cred.networkdevice_set.all()
+[<NetworkDevice: pynet-sw1>, <NetworkDevice: pynet-sw2>, <NetworkDevice: pynet-sw3>, <NetworkDevice: pynet-sw4>]
+>>>
+>>> for a_device in net_devices:
+...     print a_device.device_name a_device.device_type a_device.credentials
+  File "<console>", line 2
+    print a_device.device_name a_device.device_type a_device.credentials
+                                      ^
+SyntaxError: invalid syntax
+>>>     print a_device.device_name
+  File "<console>", line 1
+    print a_device.device_name
+    ^
+IndentationError: unexpected indent
+>>>
+>>> for a_device in net_devices:
+...     print a_device.device_name
+...     print a_device.credentials
+...     print a_device.device_type
+...
+pynet-rtr1
+pyclass
+cisco_ios
+pynet-rtr2
+pyclass
+cisco_ios
+pynet-sw1
+admin1
+arista_eos
+pynet-sw2
+admin1
+arista_eos
+pynet-sw3
+admin1
+arista_eos
+pynet-sw4
+admin1
+arista_eos
+juniper-srx
+pyclass
+juniper
+>>>
